@@ -1,4 +1,4 @@
-# JuegosDivertidos
+# El mundo de Angelina
 
 Sitio estático en español con un menú de juegos y un vestidor virtual interactivo. Sin instalación, backend ni cuentas.
 

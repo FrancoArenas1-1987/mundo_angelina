@@ -431,7 +431,7 @@ function avatarSvg(s, exportImage = false) {
     ${garment(byId(s.outfit.bottom))}
     ${!s.outfit.top && !s.outfit.dress ? `<path d="${silhouettes.tee}" fill="#f8eedf"/>` : ''}
     ${garment(byId(s.outfit.top))}${garment(byId(s.outfit.dress))}${garment(byId(s.outfit.shoes))}${bodyAccessory}${handSvg(s,'left')}${handSvg(s,'right')}</g>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 ${exportImage?430:410}" role="img" aria-label="Personaje con tu combinación de ropa">${hatDefs}${exportImage?'<rect width="260" height="430" rx="18" fill="#f4edf9"/><ellipse cx="130" cy="379" rx="67" ry="9" fill="#e0d4eb"/>':''}<g transform="translate(130 377) scale(${scale}) translate(-130 -377)"><g transform="translate(130 149) scale(${headScale}) translate(-130 -149)"><g data-part="hair-back"${hatClip}>${hairBack}</g></g><path d="M118 138 H142 V157 Q130 170 118 157Z" fill="${s.skin}"/>${body}<g data-part="head" transform="translate(130 149) scale(${headScale}) translate(-130 -149)"><ellipse cx="94" cy="112" rx="6" ry="10" fill="${s.skin}"/><ellipse cx="166" cy="112" rx="6" ry="10" fill="${s.skin}"/>${face}${faceDetails}<g data-part="hair-front"${hatClip}>${hairFront}</g>${headAccessory}</g></g>${exportImage?'<text x="130" y="410" text-anchor="middle" fill="#7854cb" font-family="sans-serif" font-size="11">Mi outfit · JuegosDivertidos</text>':''}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 ${exportImage?430:410}" role="img" aria-label="Personaje con tu combinación de ropa">${hatDefs}${exportImage?'<rect width="260" height="430" rx="18" fill="#f4edf9"/><ellipse cx="130" cy="379" rx="67" ry="9" fill="#e0d4eb"/>':''}<g transform="translate(130 377) scale(${scale}) translate(-130 -377)"><g transform="translate(130 149) scale(${headScale}) translate(-130 -149)"><g data-part="hair-back"${hatClip}>${hairBack}</g></g><path d="M118 138 H142 V157 Q130 170 118 157Z" fill="${s.skin}"/>${body}<g data-part="head" transform="translate(130 149) scale(${headScale}) translate(-130 -149)"><ellipse cx="94" cy="112" rx="6" ry="10" fill="${s.skin}"/><ellipse cx="166" cy="112" rx="6" ry="10" fill="${s.skin}"/>${face}${faceDetails}<g data-part="hair-front"${hatClip}>${hairFront}</g>${headAccessory}</g></g>${exportImage?'<text x="130" y="410" text-anchor="middle" fill="#7854cb" font-family="sans-serif" font-size="11">Mi outfit · El mundo de Angelina</text>':''}</svg>`;
 }
 
 function toast(message) { $('#toast').textContent = message; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),3200); }
@@ -468,7 +468,7 @@ function route() {
   const game=location.hash==='#vestidor';
   const salon=location.hash==='#salon';
   $('#home-view').hidden=game||salon; $('#game-view').hidden=!game; $('#salon-view').hidden=!salon;
-  document.title=salon?'Salón Brillitos · JuegosDivertidos':game?'Mi vestidor creativo · JuegosDivertidos':'JuegosDivertidos · Imagina, crea y juega';
+  document.title=salon?'Salón Brillitos · El mundo de Angelina':game?'Mi vestidor creativo · El mundo de Angelina':'El mundo de Angelina · Imagina, crea y juega';
   document.dispatchEvent(new Event(salon?'salonopen':'salonclose'));
   if(location.hash!=='#juegos') window.scrollTo({top:0,behavior:'instant'});
 }
@@ -541,7 +541,7 @@ $('#saved-grid').addEventListener('click',event=>{
 });
 $('#download-outfit').addEventListener('click',()=>{
   const svg=avatarSvg(state,true);const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}));const img=new Image();
-  img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1040;canvas.height=1720;const context=canvas.getContext('2d');context.drawImage(img,0,0,1040,1720);canvas.toBlob(blob=>{if(!blob){toast('No se pudo preparar la imagen. Inténtalo otra vez.');return;}const imageUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=imageUrl;a.download='mi-outfit-juegosdivertidos.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(imageUrl),10000);toast('Tu imagen está lista para descargar ♡');},'image/png');}catch{toast('No se pudo descargar la imagen en este navegador.');}finally{URL.revokeObjectURL(url);}};
+  img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=1040;canvas.height=1720;const context=canvas.getContext('2d');context.drawImage(img,0,0,1040,1720);canvas.toBlob(blob=>{if(!blob){toast('No se pudo preparar la imagen. Inténtalo otra vez.');return;}const imageUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=imageUrl;a.download='mi-outfit-el-mundo-de-angelina.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(imageUrl),10000);toast('Tu imagen está lista para descargar ♡');},'image/png');}catch{toast('No se pudo descargar la imagen en este navegador.');}finally{URL.revokeObjectURL(url);}};
   img.onerror=()=>{URL.revokeObjectURL(url);toast('No se pudo preparar la imagen. Inténtalo otra vez.');};img.src=url;
 });
 
