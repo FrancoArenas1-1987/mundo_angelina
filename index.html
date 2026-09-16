@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7450d7">
+  <meta name="description" content="Un pequeño universo para jugar y crear. Diseña personajes y combina outfits en el vestidor virtual de JuegosDivertidos.">
+  <title>JuegosDivertidos · Imagina, crea y juega</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="salon.css">
+  <link rel="stylesheet" href="responsive.css">
+  <script src="app.js" defer></script>
+  <script src="salon.js" defer></script>
+  <script src="responsive.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="JuegosDivertidos, inicio"><span class="brand-icon">✦</span><span>Juegos<span class="purple">Divertidos</span><small>UN MUNDO PARA IMAGINAR</small></span></a>
+    <nav aria-label="Principal"><a class="nav-link" href="#inicio">Nuestros juegos</a><button class="saved-link" id="open-saved">♡ <span>Mis outfits</span><b id="saved-count">0</b></button></nav>
+  </header>
+
+  <main id="home-view">
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow"><span class="green-dot"></span> PEQUEÑOS JUEGOS, GRANDES IDEAS</span><h1>Un poquito de juego.<br>Un montón de <span>imaginación.</span><svg viewBox="0 0 330 14" aria-hidden="true"><path d="M4 10 Q160 -4 326 8"/></svg></h1><p>Un lugar para explorar, crear y ser tú.<br>Elige tu próxima aventura y ¡deja volar tus ideas!</p><a class="primary" href="#juegos">Vamos a jugar <span>↗</span></a><div class="hero-note"><span>✧</span> Sin cuentas. Sin prisas. Solo diversión.</div></div>
+      <div class="hero-art" aria-label="Ilustración de personajes y prendas del vestidor"><span class="art-star star-one">✦</span><span class="art-star star-two">✳</span><div class="floating-label label-one">¡Tu estilo, tus reglas! <span>♡</span></div><div class="mini-swatch"><i></i><i></i><i></i><i></i><span>Tu paleta de hoy</span></div><div class="hero-avatar" id="hero-avatar"></div><div class="floating-shirt" id="hero-shirt"></div><div class="floating-label label-two">hecho con imaginación ✨</div><span class="art-doodle">♡</span></div>
+    </section>
+    <section id="juegos" class="games-section"><div class="section-heading"><div><span class="eyebrow">ELIGE TU AVENTURA</span><h2>¿A qué jugamos hoy?</h2></div><span class="little-note">Un mundo de posibilidades <span>↴</span></span></div><div class="game-grid">
+      <article class="game-card featured"><button class="card-art wardrobe-art" data-play aria-label="Jugar a Mi vestidor creativo"><span class="pill">✦ NUEVO</span><div class="card-clothes" id="card-clothes"></div><div id="card-avatar"></div><span class="card-sparkle">✧</span><span class="art-tag">mix & match</span></button><div class="card-body"><span class="category">CREATIVIDAD · MODA</span><h3>Mi vestidor creativo</h3><p>Crea tu personaje, prueba prendas y descubre combinaciones tan únicas como tú.</p><button class="primary full" data-play>¡A crear mi outfit! <span>→</span></button><span class="card-foot">♡ Para todas las imaginaciones</span></div></article>
+      <article class="game-card coming"><div class="card-art paint-art"><span class="pill neutral">EN EL TALLER</span><div class="paint-paper"><span>✿</span><i></i><b>✦</b><em>〰</em></div><span class="pencil">▰</span></div><div class="card-body"><span class="category">ARTE · COLORES</span><h3>Pequeño gran artista</h3><p>Un lienzo lleno de posibilidades para darle color a todas tus ideas.</p><div class="soon-button">Próximamente <span>✧</span></div><span class="card-foot">Estamos preparando algo bonito</span></div></article>
+      <article class="game-card coming"><div class="card-art garden-art"><span class="pill neutral">EN EL TALLER</span><div class="flower flower-one">✿</div><div class="flower flower-two">✿</div><div class="pot"></div><span class="garden-sun">☀</span><span class="garden-dot">✧</span></div><div class="card-body"><span class="category">NATURALEZA · DESCUBRIMIENTO</span><h3>Mi jardín mágico</h3><p>Una semilla, un poquito de cariño y muchas sorpresas por descubrir.</p><div class="soon-button">Próximamente <span>✧</span></div><span class="card-foot">Las buenas ideas están creciendo</span></div></article>
+    </div></section>
+    <section class="values-strip"><span class="value-icon">☁</span><div><h3>Aquí, la imaginación siempre gana.</h3><p>Sin puntuaciones ni formas correctas de jugar. Explora a tu ritmo y disfruta creando.</p></div><span class="value-star">✳</span></section>
+  </main>
+
+  <main id="game-view" hidden>
+    <div class="game-heading"><div><a href="#inicio" class="back-link">← Volver a los juegos</a><h1>Mi vestidor creativo <span>✧</span></h1><p>Un personaje, mil maneras de expresarte.</p></div><button class="secondary" id="random-outfit">✦ Sorpréndeme</button></div>
+    <div class="studio">
+      <section class="custom-panel panel" aria-labelledby="character-title"><div class="panel-heading"><h2 id="character-title">Tu personaje</h2><span>☺</span></div><div class="custom-fields">
+        <label class="field-label">Personaje</label><div class="segmented" id="gender-options"><button data-gender="female" aria-pressed="true">Femenino</button><button data-gender="male" aria-pressed="false">Masculino</button></div>
+        <label class="field-label" for="age">Edad <output id="age-output">12 años</output></label><input id="age" type="range" min="6" max="60" value="12"><div class="range-labels"><span>6 años</span><span>60 años</span></div>
+        <label class="field-label" for="height">Altura <output id="height-output">Media</output></label><input id="height" type="range" min="0" max="2" value="1"><div class="range-labels"><span>Baja</span><span>Alta</span></div>
+        <label class="field-label" for="build">Complexión</label><select id="build"><option value="slim">Delgada</option><option value="medium" selected>Media</option><option value="full">Más grande</option></select>
+        <label class="field-label" for="face">Forma de la cara</label><select id="face"><option value="round">Redondeada</option><option value="oval">Ovalada</option><option value="soft">Cuadrada suave</option></select>
+        <span class="field-label">Tono de piel</span><div class="swatches" id="skin-options" aria-label="Tono de piel"></div>
+        <label class="field-label" for="hair-style">Peinado</label><select id="hair-style"><option value="long">Largo</option><option value="bob">Media melena</option><option value="short">Corto</option><option value="curly">Rizado</option></select>
+        <span class="field-label">Color de pelo <output id="hair-color-output">Castaño</output></span><div class="swatches" id="hair-options" aria-label="Color de pelo"></div>
+        <label class="field-label" for="eyes">Forma de los ojos</label><select id="eyes"><option value="round">Redondos</option><option value="almond">Almendrados</option><option value="happy">Sonrientes</option></select>
+        <span class="field-label">Color de ojos</span><div class="swatches" id="eye-options" aria-label="Color de ojos"></div>
+        <label class="field-label" for="mouth">Forma de la boca</label><select id="mouth"><option value="smile">Sonrisa suave</option></select>
+      </div></section>
+      <section class="model-panel panel"><div class="model-top"><span class="eyebrow">TU PEQUEÑO ESTUDIO</span><button id="clear-outfit" class="icon-button" aria-label="Quitar prendas y volver a la ropa base" title="Volver a la ropa base">↺</button></div><div id="avatar-stage" class="avatar-stage" aria-label="Personaje. Arrastra aquí una prenda para probártela"><span class="stage-star">✦</span><div id="avatar"></div><span class="stage-sparkle">✧</span><span class="stage-floor"></span></div><div class="stage-tip">↖ Arrastra una prenda o tócala para vestir</div><div class="outfit-tags" id="outfit-tags" aria-label="Prendas puestas"></div><div class="model-actions"><button class="primary" id="save-outfit">♡ Guardar outfit</button><button class="secondary" id="download-outfit" aria-label="Descargar outfit como imagen PNG" title="Descargar imagen">↓</button></div><span class="local-note">Tus outfits se guardan en este navegador</span><a class="salon-entry" href="#salon">✂ Llevar al salón de belleza →</a></section>
+      <section class="wardrobe-panel panel" aria-labelledby="wardrobe-title"><div class="panel-heading"><h2 id="wardrobe-title">Tu armario</h2><span id="clothes-count"></span></div><div class="clothing-tabs" id="clothing-tabs" aria-label="Categoría de prendas"><button data-category="all" aria-pressed="true">Todo</button><button data-category="top" aria-pressed="false">Tops</button><button data-category="bottom" aria-pressed="false">Abajo</button><button data-category="dress" aria-pressed="false">Vestidos</button><button data-category="shoes" aria-pressed="false">Zapatos</button><button data-category="accessory" aria-pressed="false">Extras</button></div><div class="clothing-tabs style-tabs" id="style-tabs" aria-label="Estilo de ropa"><button data-style="all" aria-pressed="true">Todos los estilos</button><button data-style="casual" aria-pressed="false">Casual</button><button data-style="sport" aria-pressed="false">Deportiva</button><button data-style="elegant" aria-pressed="false">Elegante</button></div><div class="clothes-grid" id="clothes-grid"></div><div class="style-tip"><span>✦</span><p id="style-tip">Prueba un color protagonista y combínalo con tonos suaves. ¡O inventa tus propias reglas!</p></div></section>
+    </div>
+  </main>
+  <main id="salon-view" hidden>
+    <div class="game-heading"><div><a href="#vestidor" class="back-link">← Volver a mi vestidor</a><h1>Salón Brillitos <span>✧</span></h1><p>Un ratito para mimar a tu personaje y probar un nuevo look.</p></div><span class="salon-badge">♡ TU MOMENTO DE BRILLAR</span></div>
+    <div class="salon-stations" aria-label="Estaciones del salón"><button data-station="hair" aria-pressed="true">✂ Peluquería</button><button data-station="makeup" aria-pressed="false">✿ Maquillaje</button><button data-station="nails" aria-pressed="false">♡ Manicura</button></div>
+    <div class="salon-layout">
+      <section class="panel salon-services"><div class="panel-heading"><h2>Tu cita de hoy</h2><span>✦</span></div>
+        <div id="hair-services" class="service-content">
+          <label class="field-label" for="salon-cut">Elige un corte</label><select id="salon-cut"><option value="bob">Media melena</option><option value="short">Corto</option><option value="pixie">Pixie</option><option value="animeShort">Anime en capas</option></select>
+          <button class="service-button" data-tool="cut" draggable="true"><span>✂</span><div>Cortar el pelo<small>Arrastra las tijeras a la cabeza</small></div></button>
+          <label class="field-label" for="salon-hairstyle">Elige un peinado</label><select id="salon-hairstyle"></select>
+          <button class="service-button" data-tool="comb" draggable="true"><span>≋</span><div>Peinar<small>Trenzas, ondas, coletas y más</small></div></button>
+          <div class="wash-station"><span class="eyebrow">EL LAVACABEZAS</span><div class="wash-illustration" aria-hidden="true"><span>♧</span><i></i><b>◡</b></div><button class="secondary" data-tool="wash" draggable="true">♧ Lavar y enjuagar</button><p>Espuma y agua para quitar el spray y recuperar el color anterior.</p></div>
+        </div>
+        <div id="makeup-services" class="service-content" hidden><span class="eyebrow">UN TOQUE DE COLOR</span><h3>Tu lienzo eres tú</h3><p>Elige un labial, rubor o sombra del tocador. Arrástralo a la cara o tócalo para aplicarlo.</p><div class="makeup-legend"><span>♡ Labios</span><span>✿ Mejillas</span><span>✧ Párpados</span></div><button class="secondary full" data-tool="clean-makeup">Quitar maquillaje</button></div>
+        <div id="nails-services" class="service-content" hidden><span class="eyebrow">DIEZ PEQUEÑOS BRILLOS</span><h3>Manos a la obra</h3><p>Elige un esmalte y arrástralo a las manos ampliadas, o toca el frasco para pintar las diez uñas.</p><div class="nail-art-note">♡ Combina tus uñas con tu outfit</div><button class="secondary full" data-tool="clean-nails">Quitar esmalte</button></div>
+      </section>
+      <section class="panel salon-mirror-panel"><div class="model-top"><span class="eyebrow">ESPEJITO, ESPEJITO</span><span class="mirror-lights" aria-hidden="true">● ● ●</span></div><div class="salon-scene" id="salon-scene"><div class="mirror-frame" aria-hidden="true"></div><div class="salon-chair" aria-hidden="true"></div><div id="salon-avatar"></div><button id="salon-head-target" class="salon-target" aria-label="Aplicar herramienta seleccionada al cabello o la cara"><span>Arrastra aquí ✧</span></button><div id="salon-effects" aria-hidden="true"></div></div>
+        <div id="manicure-preview" class="manicure-preview" hidden><span class="eyebrow">TUS MANOS, DE CERQUITA</span><button id="salon-hands-target" aria-label="Aplicar esmalte seleccionado a las uñas"><span id="manicure-hands"></span><small>Arrastra el esmalte aquí ♡</small></button></div>
+        <p id="salon-status" class="salon-status" role="status" aria-live="polite">Elige una herramienta o un spray para empezar.</p><div class="salon-save-actions"><button class="primary" id="salon-save">♡ Guardar mi look</button><button class="secondary" id="salon-download" aria-label="Descargar personaje con su nuevo look">↓</button></div><a class="salon-return" href="#vestidor">Listo, volver al vestidor →</a>
+      </section>
+      <section class="panel salon-cabinet"><div class="panel-heading"><h2 id="salon-shelf-title">La estantería de color</h2><span>✿</span></div><p class="cabinet-note" id="salon-shelf-note">Toma un spray y llévalo sobre la cabeza. ¡Una lluvia de color!</p><div id="salon-products"></div><div class="salon-help"><span>✧</span><p>También puedes tocar las herramientas para usarlas. En el celular, mantén pulsado un frasco para arrastrarlo.</p></div></section>
+    </div>
+  </main>
+  <footer><a class="footer-brand" href="#inicio">✦ JuegosDivertidos</a><span>Hecho para imaginar. Diseñado para sonreír.</span><span>¡Sé tú, crea y juega! ♡</span></footer>
+  <dialog id="saved-dialog"><div class="dialog-heading"><div><span class="eyebrow">TU COLECCIÓN</span><h2>Mis outfits favoritos</h2></div><button id="close-saved" class="icon-button" aria-label="Cerrar">×</button></div><p class="collection-note">Guardados en este navegador. Puedes volver a vestirlos cuando quieras.</p><div id="saved-grid"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

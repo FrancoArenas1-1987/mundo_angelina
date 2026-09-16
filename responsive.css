@@ -1,0 +1,69 @@
+/* Keep grids inside their tracks, including narrow phones and enlarged text. */
+.studio > *, .salon-layout > *, .hero > *, .custom-fields > * { min-width: 0; }
+select { max-width: 100%; }
+.clothing-item, [data-tool][draggable="true"] { -webkit-touch-callout: none; user-select: none; }
+#character-preview {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(88px, env(safe-area-inset-bottom));
+  z-index: 900;
+  width: 116px;
+  padding: 4px;
+  background: #fffafef5;
+  border: 1px solid #cdb9e6;
+  border-radius: 16px;
+  box-shadow: 0 5px 22px #4a35552b;
+}
+#preview-toggle {
+  display: block; margin-left: auto; width: 44px; height: 44px;
+  border-radius: 12px; background: #eee7fa; color: var(--purple-dark); font-size: 24px;
+}
+#preview-result { display: block; width: 100%; padding: 0 0 9px; background: transparent; border-radius: 10px; font-size: 11px; }
+#preview-art { display: block; height: min(145px, 24vh); }
+#preview-art svg { width: 100%; height: 100%; pointer-events: none; }
+#character-preview.collapsed { width: 54px; }
+#character-preview.collapsed #preview-result { display: none; }
+@media (max-width: 700px) {
+  .hero h1 { font-size: clamp(32px, 8.9vw, 40px); }
+  .hero h1 svg { width: min(240px, 75%); margin-left: auto; max-width: 100%; }
+  .hero-avatar { left: calc(50% - 80px); }
+  .game-heading { flex-wrap: wrap; }
+  .game-heading > .secondary { margin-top: 0; }
+  .custom-fields { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .custom-fields .field-label { margin: 12px 0 0; }
+  .clothes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .clothing-item span { font-size: 12px; }
+  .clothing-item svg { height: 78px; }
+  .salon-cabinet .spray-shelf { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .salon-product small { font-size: 11px; }
+  .salon-stations button { font-size: 12px; }
+  .game-heading p, .stage-tip, .cabinet-note, .salon-status, .service-content > p, .style-tip p { font-size: 13px; }
+  .service-button div, .wash-station .secondary { font-size: 14px; }
+  .service-button small, .wash-station p, .salon-help p { font-size: 12px; }
+  .salon-return, .back-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; }
+  .salon-return { display: flex; justify-content: center; }
+  .local-note { font-size: 11px; }
+  #saved-grid { gap: 10px; }
+  .saved-card { padding: 7px; }
+  .saved-card .secondary { width: 100%; }
+  dialog { padding: 16px; }
+}
+@media (pointer: coarse), (max-width: 700px) {
+  select { font-size: 16px; min-height: 44px; }
+  .field-label { font-size: 13px; }
+  output { font-size: 12px; }
+  .custom-fields input[type="range"] { min-height: 44px; }
+  .custom-fields .swatches { gap: 10px; }
+  .custom-fields .swatch { width: 44px; height: 44px; flex: 0 0 44px; }
+  .segmented button, .clothing-tabs button { font-size: 12px; min-height: 44px; min-width: 44px; }
+  .icon-button, .saved-link, .primary, .secondary, .outfit-tag, .delete-saved, .salon-stations button { min-height: 44px; min-width: 44px; }
+  .outfit-tag { font-size: 11px; }
+  .salon-cabinet .spray-shelf { grid-template-columns: repeat(auto-fit, minmax(44px, 1fr)); }
+  .salon-cabinet .makeup-products { grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)); }
+  .salon-product { min-height: 44px; min-width: 44px; }
+  .clothing-item:hover, .salon-product:hover, .primary:hover { transform: none; }
+}
+@media (max-height: 500px) {
+  #character-preview { bottom: 12px; }
+  #preview-art { height: 85px; }
+}
