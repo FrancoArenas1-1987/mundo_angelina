@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#7450d7">
-  <meta name="description" content="Un pequeño universo para jugar y crear. Diseña personajes y combina outfits en el vestidor virtual de El mundo de Angelina.">
+  <meta name="description" content="Un pequeño universo para jugar y crear. Diseña personajes, pinta, cultiva flores y descubre palabras en El mundo de Angelina.">
   <title>El mundo de Angelina · Imagina, crea y juega</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="salon.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="games.css">
+  <link rel="stylesheet" href="scores.css">
+  <script src="score-rules.js" defer></script>
+  <script src="scores.js" defer></script>
+  <script src="words.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="games.js" defer></script>
   <script src="salon.js" defer></script>
   <script src="responsive.js" defer></script>
 </head>
@@ -18,6 +24,12 @@
     <a class="brand" href="#inicio" aria-label="El mundo de Angelina, inicio"><span class="brand-icon">✦</span><span>El mundo de <span class="purple">Angelina</span><small>UN MUNDO PARA IMAGINAR</small></span></a>
     <nav aria-label="Principal"><a class="nav-link" href="#inicio">Nuestros juegos</a><button class="saved-link" id="open-saved">♡ <span>Mis outfits</span><b id="saved-count">0</b></button></nav>
   </header>
+  <section class="score-strip" aria-label="Jugador y puntaje">
+    <div><span class="score-caption">JUEGAS COMO</span><strong id="score-player-name">Invitado</strong><span id="score-player-total">Elige un apodo para sumar puntos</span></div>
+    <div class="score-strip-actions"><button class="secondary" id="score-player-open">Elegir apodo</button><a class="primary" href="#puntajes">🏆 Puntajes</a></div>
+    <p id="score-feedback" role="status">Puntajes de este navegador. Se conservan al cerrar y volver.</p>
+  </section>
+
 
   <main id="home-view">
     <section class="hero">
@@ -26,14 +38,70 @@
     </section>
     <section id="juegos" class="games-section"><div class="section-heading"><div><span class="eyebrow">ELIGE TU AVENTURA</span><h2>¿A qué jugamos hoy?</h2></div><span class="little-note">Un mundo de posibilidades <span>↴</span></span></div><div class="game-grid">
       <article class="game-card featured"><button class="card-art wardrobe-art" data-play aria-label="Jugar a Mi vestidor creativo"><span class="pill">✦ NUEVO</span><div class="card-clothes" id="card-clothes"></div><div id="card-avatar"></div><span class="card-sparkle">✧</span><span class="art-tag">mix & match</span></button><div class="card-body"><span class="category">CREATIVIDAD · MODA</span><h3>Mi vestidor creativo</h3><p>Crea tu personaje, prueba prendas y descubre combinaciones tan únicas como tú.</p><button class="primary full" data-play>¡A crear mi outfit! <span>→</span></button><span class="card-foot">♡ Para todas las imaginaciones</span></div></article>
-      <article class="game-card coming"><div class="card-art paint-art"><span class="pill neutral">EN EL TALLER</span><div class="paint-paper"><span>✿</span><i></i><b>✦</b><em>〰</em></div><span class="pencil">▰</span></div><div class="card-body"><span class="category">ARTE · COLORES</span><h3>Pequeño gran artista</h3><p>Un lienzo lleno de posibilidades para darle color a todas tus ideas.</p><div class="soon-button">Próximamente <span>✧</span></div><span class="card-foot">Estamos preparando algo bonito</span></div></article>
-      <article class="game-card coming"><div class="card-art garden-art"><span class="pill neutral">EN EL TALLER</span><div class="flower flower-one">✿</div><div class="flower flower-two">✿</div><div class="pot"></div><span class="garden-sun">☀</span><span class="garden-dot">✧</span></div><div class="card-body"><span class="category">NATURALEZA · DESCUBRIMIENTO</span><h3>Mi jardín mágico</h3><p>Una semilla, un poquito de cariño y muchas sorpresas por descubrir.</p><div class="soon-button">Próximamente <span>✧</span></div><span class="card-foot">Las buenas ideas están creciendo</span></div></article>
+      <article class="game-card"><div class="card-art paint-art"><span class="pill">¡A JUGAR!</span><div class="paint-paper"><span>✿</span><i></i><b>✦</b><em>〰</em></div><span class="pencil">▰</span></div><div class="card-body"><span class="category">ARTE · COLORES</span><h3>Pequeño gran artista</h3><p>Un lienzo lleno de posibilidades para darle color a todas tus ideas.</p><a class="primary full" href="#artista">¡A pintar! <span>→</span></a><span class="card-foot">Pinceles, sellos y muchas ideas</span></div></article>
+      <article class="game-card"><div class="card-art garden-art"><span class="pill">¡A JUGAR!</span><div class="flower flower-one">✿</div><div class="flower flower-two">✿</div><div class="pot"></div><span class="garden-sun">☀</span><span class="garden-dot">✧</span></div><div class="card-body"><span class="category">NATURALEZA · DESCUBRIMIENTO</span><h3>Mi jardín mágico</h3><p>Una semilla, un poquito de cariño y muchas sorpresas por descubrir.</p><a class="primary full" href="#jardin">¡A cultivar! <span>→</span></a><span class="card-foot">Tu pequeño jardín, a tu ritmo</span></div></article>
+      <article class="game-card"><a href="#colgado" class="card-art hangman-art-card" aria-label="Jugar al colgado"><span aria-hidden="true">A _ Ñ</span></a><div class="card-body"><span class="category">PALABRAS · INGENIO</span><h3>El juego del colgado</h3><p>Descubre más de 1.500 palabras con categorías y pistas para mentes curiosas.</p><a class="primary full" href="#colgado">¡A descubrir palabras! <span>→</span></a><span class="card-foot">Vocabulario para los 11 años</span></div></article>
     </div></section>
-    <section class="values-strip"><span class="value-icon">☁</span><div><h3>Aquí, la imaginación siempre gana.</h3><p>Sin puntuaciones ni formas correctas de jugar. Explora a tu ritmo y disfruta creando.</p></div><span class="value-star">✳</span></section>
+    <section class="values-strip"><span class="value-icon">☁</span><div><h3>Aquí, la imaginación siempre gana.</h3><p>Explora a tu ritmo, completa actividades y guarda tus puntos con tu apodo.</p></div><span class="value-star">✳</span></section>
+  </main>
+
+
+
+  <main id="score-view" hidden>
+    <div class="game-heading"><div><a href="#inicio" class="back-link">← Volver a los juegos</a><h1>Tabla de puntajes <span>🏆</span></h1><p>Un lugar para celebrar tus avances.</p></div></div>
+    <p class="score-local-note"><strong>Solo en este navegador.</strong> Esta tabla reúne los apodos que juegan en este navegador y dispositivo. No se comparte con otros visitantes de la web. Borrar los datos del sitio elimina los puntajes.</p>
+    <div class="score-layout">
+      <section class="panel score-panel" aria-labelledby="score-ranking-title">
+        <label for="score-filter">Ver clasificación</label><select id="score-filter"><option value="all">Todos los juegos · total</option></select>
+        <h2 id="score-ranking-title">Clasificación general</h2>
+        <p id="score-empty">Todavía no hay jugadores. Elige un apodo arriba y comienza tu aventura.</p>
+        <table id="score-table" hidden><caption class="score-visually-hidden">Puntajes guardados en este navegador, de mayor a menor</caption><thead><tr><th scope="col" aria-label="Puesto">Pos.</th><th scope="col">Apodo</th><th scope="col">Puntos</th></tr></thead><tbody id="score-table-body"></tbody></table>
+      </section>
+      <section class="panel score-panel"><h2>Cómo sumar puntos</h2><ul id="score-rules"></ul><p class="play-help">Una palabra, dibujo, outfit o look ya premiado no vuelve a sumar para el mismo apodo. Cada flor nueva sí suma. Cambiar de apodo comienza una nueva palabra en el colgado.</p><p class="play-help">Los puntos van al apodo activo cuando completas la actividad. El lienzo, el jardín y el personaje se comparten entre los apodos de este navegador.</p><h3>Tus últimas actividades</h3><p id="score-history-empty">Tus próximos logros aparecerán aquí.</p><ul id="score-history"></ul></section>
+    </div>
+  </main>
+  <main id="artist-view" hidden>
+    <div class="game-heading"><div><a class="back-link" href="#inicio">← Volver a los juegos</a><h1>Pequeño gran artista <span>✧</span></h1><p class="game-score-badge" data-score-game="artist">Elige un apodo para guardar tus puntos.</p><p>Un lienzo para todas tus ideas.</p></div></div>
+    <div class="play-layout">
+      <section class="panel play-controls" aria-label="Herramientas de dibujo">
+        <h2>Tu caja de colores</h2>
+        <label for="art-tool">Herramienta</label><select id="art-tool"><option value="brush">Pincel</option><option value="eraser">Goma</option><option value="flower">Sello de flor</option><option value="star">Sello de estrella</option><option value="heart">Sello de corazón</option></select>
+        <label>Paleta</label><div id="art-colors" class="art-colors"></div>
+        <label for="art-color">Color personalizado</label><input type="color" id="art-color" value="#7854cb">
+        <label for="art-size">Tamaño <output id="art-size-value">12</output></label><input id="art-size" type="range" min="2" max="60" value="12">
+        <div class="play-actions"><button id="art-undo" class="secondary" disabled>↶ Deshacer</button><button id="art-redo" class="secondary" disabled>↷ Rehacer</button><button id="art-clear" class="secondary">Lienzo nuevo</button></div>
+        <button id="art-finish" class="primary">Terminar obra · +50 puntos</button><p id="art-mission-progress">Objetivo: 3 colores, 2 herramientas y 10 trazos o sellos.</p><div class="play-actions"><button id="art-idea" class="secondary">✦ Dame una idea</button><button id="art-save" class="primary">↓ Descargar PNG</button></div>
+        <details class="play-instructions"><summary>Cómo jugar</summary><p class="play-help">Dibuja con el dedo, ratón o lápiz. Con teclado: enfoca el lienzo, mueve el cursor con las flechas y pulsa Espacio para pintar o poner un sello. El dibujo se conserva al cambiar de juego durante esta visita. Descárgalo antes de cerrar.</p></details>
+      </section>
+      <section class="panel play-board" aria-label="Estudio de arte"><h2>Hoy creas tú</h2><p id="art-status" class="play-status" role="status">Prueba un jardín de flores de todos los colores.</p><canvas id="art-canvas" class="art-canvas" width="1000" height="700" tabindex="0" aria-label="Lienzo de dibujo. Usa flechas para mover el cursor y Espacio para pintar.">Tu navegador necesita admitir canvas para dibujar.</canvas><p id="art-cursor" class="play-help">Cursor de teclado: centro del lienzo.</p></section>
+    </div>
+  </main>
+  <main id="garden-view" hidden>
+    <div class="game-heading"><div><a class="back-link" href="#inicio">← Volver a los juegos</a><h1>Mi jardín mágico <span>✧</span></h1><p class="game-score-badge" data-score-game="garden">Elige un apodo para guardar tus puntos.</p><p>Planta, cuida y descubre tu pequeña colección de flores.</p></div></div>
+    <div class="play-layout">
+      <section class="panel play-controls" aria-label="Herramientas del jardín"><h2>Un poquito de cariño</h2>
+        <label for="garden-seed">Tu próxima semilla</label><select id="garden-seed"></select>
+
+        <details class="play-instructions"><summary>Cómo jugar</summary><p class="play-help">Elige una herramienta y toca una parcela. Cada semilla necesita dos riegos y dos rayitos de luz para florecer. Colecciona la flor para volver a plantar. Aquí las plantas no se marchitan y no tienes que esperar.</p></details>
+        <p class="play-help">Es un jardín de fantasía: en un jardín real cada especie necesita cuidados diferentes.</p><p id="garden-storage" class="play-help">Tu jardín se guarda en este navegador.</p>
+      </section>
+      <section class="panel play-board"><h2>Tu rincón de naturaleza</h2><p id="garden-status" class="play-status" role="status">Elige una semilla y planta en una parcela vacía.</p><div class="play-actions" id="garden-tools"><button class="secondary" data-garden-tool="plant" aria-pressed="true">🌱 Plantar</button><button class="secondary" data-garden-tool="water" aria-pressed="false">💧 Regar</button><button class="secondary" data-garden-tool="sun" aria-pressed="false">☀️ Dar luz</button><button class="secondary" data-garden-tool="collect" aria-pressed="false">🌸 Coleccionar</button></div><div id="garden-plots" class="garden-plots" aria-label="Nueve parcelas para cultivar"></div><h3 id="garden-progress">Tu colección</h3><div id="garden-collection" class="garden-collection"></div></section>
+    </div>
+  </main>
+  <main id="hangman-view" hidden>
+    <div class="game-heading"><div><a class="back-link" href="#inicio">← Volver a los juegos</a><h1>El juego del colgado <span>✧</span></h1><p class="game-score-badge" data-score-game="hangman">Elige un apodo para guardar tus puntos.</p><p>Una letra, una pista y una palabra por descubrir.</p></div></div>
+    <div class="play-layout">
+      <section class="panel play-controls"><h2>Desafío de palabras</h2><p id="hangman-count" class="play-help"></p>
+        <label for="hangman-category">Categoría</label><select id="hangman-category"><option value="all">Todas las categorías</option></select>
+        <label for="hangman-level">Nivel</label><select id="hangman-level"><option value="all">Todas las palabras</option><option value="short">Calentamiento · hasta 6 letras</option><option value="medium">Explorador · 7 a 9 letras</option><option value="long">Gran reto · 10 letras o más</option></select>
+        <details class="play-instructions"><summary>Cómo jugar</summary><p class="play-help">Tienes 6 errores posibles y una ayuda gratis por palabra. Usa el teclado o toca las letras. Las tildes y la Ü se descubren con su vocal; la Ñ tiene su propia tecla. Cambiar categoría o nivel comienza una partida.</p></details>
+      </section>
+      <section class="panel play-board" aria-label="Partida del colgado"><h2 id="hangman-topic"></h2><svg id="hangman-drawing" class="hangman-art" viewBox="0 0 170 180" role="img" aria-label="Muñeco del colgado"><path d="M15 165H155M40 165V15H110V35" stroke="#ab95c5" stroke-width="6" fill="none" stroke-linecap="round"/><g stroke="#7854cb" stroke-width="5" fill="none" stroke-linecap="round"><circle data-part cx="110" cy="53" r="18"/><path data-part d="M110 71V115"/><path data-part d="M110 80L83 100"/><path data-part d="M110 80L137 100"/><path data-part d="M110 115L88 146"/><path data-part d="M110 115L132 146"/></g></svg><p id="hangman-status" class="play-status" role="status"></p><div id="hangman-word" class="word-slots" role="group" aria-label="Palabra oculta"></div><div class="play-actions"><button id="hangman-new" class="primary">Nueva palabra</button><button id="hangman-hint" class="secondary">✦ Revelar una letra</button></div><div id="hangman-keys" class="letter-keys" role="group" aria-label="Letras del abecedario"></div></section>
+    </div>
   </main>
 
   <main id="game-view" hidden>
-    <div class="game-heading"><div><a href="#inicio" class="back-link">← Volver a los juegos</a><h1>Mi vestidor creativo <span>✧</span></h1><p>Un personaje, mil maneras de expresarte.</p></div><button class="secondary" id="random-outfit">✦ Sorpréndeme</button></div>
+    <div class="game-heading"><div><a href="#inicio" class="back-link">← Volver a los juegos</a><h1>Mi vestidor creativo <span>✧</span></h1><p class="game-score-badge" data-score-game="wardrobe">Elige un apodo para guardar tus puntos.</p><p>Un personaje, mil maneras de expresarte.</p></div><button class="secondary" id="random-outfit">✦ Sorpréndeme</button></div>
     <div class="studio">
       <section class="custom-panel panel" aria-labelledby="character-title"><div class="panel-heading"><h2 id="character-title">Tu personaje</h2><span>☺</span></div><div class="custom-fields">
         <label class="field-label">Personaje</label><div class="segmented" id="gender-options"><button data-gender="female" aria-pressed="true">Femenino</button><button data-gender="male" aria-pressed="false">Masculino</button></div>
@@ -53,7 +121,7 @@
     </div>
   </main>
   <main id="salon-view" hidden>
-    <div class="game-heading"><div><a href="#vestidor" class="back-link">← Volver a mi vestidor</a><h1>Salón Brillitos <span>✧</span></h1><p>Un ratito para mimar a tu personaje y probar un nuevo look.</p></div><span class="salon-badge">♡ TU MOMENTO DE BRILLAR</span></div>
+    <div class="game-heading"><div><a href="#vestidor" class="back-link">← Volver a mi vestidor</a><h1>Salón Brillitos <span>✧</span></h1><p class="game-score-badge" data-score-game="salon">Elige un apodo para guardar tus puntos.</p><p>Un ratito para mimar a tu personaje y probar un nuevo look.</p></div><span class="salon-badge">♡ TU MOMENTO DE BRILLAR</span></div>
     <div class="salon-stations" aria-label="Estaciones del salón"><button data-station="hair" aria-pressed="true">✂ Peluquería</button><button data-station="makeup" aria-pressed="false">✿ Maquillaje</button><button data-station="nails" aria-pressed="false">♡ Manicura</button></div>
     <div class="salon-layout">
       <section class="panel salon-services"><div class="panel-heading"><h2>Tu cita de hoy</h2><span>✦</span></div>
@@ -77,5 +145,13 @@
   <footer><a class="footer-brand" href="#inicio">✦ El mundo de Angelina</a><span>Hecho para imaginar. Diseñado para sonreír.</span><span>¡Sé tú, crea y juega! ♡</span><p class="footer-dedication">Nunca olvides que tu papá te ama con todo su corazón.</p></footer>
   <dialog id="saved-dialog"><div class="dialog-heading"><div><span class="eyebrow">TU COLECCIÓN</span><h2>Mis outfits favoritos</h2></div><button id="close-saved" class="icon-button" aria-label="Cerrar">×</button></div><p class="collection-note">Guardados en este navegador. Puedes volver a vestirlos cuando quieras.</p><div id="saved-grid"></div></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="score-player-dialog" aria-labelledby="score-player-title">
+    <div class="dialog-heading"><h2 id="score-player-title">¿Quién juega hoy?</h2><button id="score-player-close" class="icon-button" aria-label="Cerrar selección de jugador">×</button></div>
+    <p>Usa un apodo para guardar tus puntos aquí, sin crear una cuenta.</p>
+    <label for="score-existing">Jugadores de este navegador</label><select id="score-existing"><option value="">Elige un jugador</option></select><button id="score-use-player" class="secondary" disabled>Jugar con este apodo</button>
+    <form id="score-player-form"><label for="score-new-name">Crear un nuevo apodo</label><input id="score-new-name" name="nickname" maxlength="20" minlength="2" required placeholder="LunaEstelar" autocomplete="off"><button class="primary" type="submit">Crear y jugar</button></form>
+    <p id="score-player-error" role="alert"></p><p class="play-help">Hasta 20 jugadores en este navegador. Cualquiera que use este dispositivo puede seleccionar un apodo de la lista.</p>
+  </dialog>
 </body>
 </html>

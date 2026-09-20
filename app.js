@@ -467,8 +467,11 @@ function wear(id) {
 function route() {
   const game=location.hash==='#vestidor';
   const salon=location.hash==='#salon';
-  $('#home-view').hidden=game||salon; $('#game-view').hidden=!game; $('#salon-view').hidden=!salon;
+  const extra = {'#puntajes':['score-view','Tabla de puntajes'],'#artista':['artist-view','Pequeño gran artista'],'#jardin':['garden-view','Mi jardín mágico'],'#colgado':['hangman-view','El juego del colgado']}[location.hash];
+  for (const id of ['artist-view','garden-view','hangman-view','score-view']) document.getElementById(id).hidden = !extra || extra[0] !== id;
+  $('#home-view').hidden=game||salon||!!extra; $('#game-view').hidden=!game; $('#salon-view').hidden=!salon;
   document.title=salon?'Salón Brillitos · El mundo de Angelina':game?'Mi vestidor creativo · El mundo de Angelina':'El mundo de Angelina · Imagina, crea y juega';
+  if(extra) document.title=extra[1]+' · El mundo de Angelina';
   document.dispatchEvent(new Event(salon?'salonopen':'salonclose'));
   if(location.hash!=='#juegos') window.scrollTo({top:0,behavior:'instant'});
 }
@@ -526,7 +529,7 @@ function persist(next) {
 $('#save-outfit').addEventListener('click',()=>{
   if(saved.length>=30){toast('Tu colección tiene 30 outfits. Elimina uno para guardar otro.');return;}
   const entry={id:`${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`,state:JSON.parse(JSON.stringify(state))};
-  if(persist([...saved,entry]))toast('¡Outfit guardado! Encuéntralo en Mis outfits ♡');
+  if(persist([...saved,entry])){toast('¡Outfit guardado! Encuéntralo en Mis outfits ♡');document.dispatchEvent(new CustomEvent('outfitsaved',{detail:{state:entry.state,source:location.hash}}));}
 });
 function renderSaved() {
   $('#saved-grid').innerHTML=saved.length?saved.map((entry,index)=>`<article class="saved-card">${avatarSvg(entry.state)}<p>Mi outfit ${index+1}</p><button class="secondary" data-load="${entry.id}">Volver a vestir →</button><button class="delete-saved" data-delete="${entry.id}" aria-label="Eliminar outfit ${index+1}">Eliminar</button></article>`).join(''):'<div class="empty-saved"><span>♡</span>Aquí vivirán tus combinaciones favoritas.<br>Crea un outfit en el vestidor y pulsa «Guardar outfit».</div>';

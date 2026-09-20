@@ -114,6 +114,8 @@ function performSalonTool(tool) {
   } else if(kind==='clean-nails') {
     state.beauty={...emptyBeauty(),...state.beauty,nails:'none'};message='Esmalte retirado. ¡A probar otra combinación!';
   } else return;
+  const scoreStation=['cut','comb','spray'].includes(kind)?'hair':['lip','blush','shadow'].includes(kind)?'makeup':kind==='nails'?'nails':null;
+  if(scoreStation)document.dispatchEvent(new CustomEvent('salonactivity',{detail:{station:scoreStation}}));
   salonTool=tool;
   syncControls();renderAvatar();salonFeedback(message);salonEffect(kind,color);
 }

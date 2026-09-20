@@ -12,7 +12,9 @@ let previewFrame;
 function previewSource(){return location.hash==='#vestidor'?$('#avatar-stage'):location.hash==='#salon'?(salonStation==='nails'?$('#manicure-preview'):$('#salon-scene')):null;}
 function updatePreviewVisibility(){
   const source=previewSource();
-  previewDock.hidden=!source||innerWidth>1100||$('#saved-dialog').open||source.getBoundingClientRect().bottom>0;
+  // Show the preview when most of the character has scrolled away, even if its feet remain visible.
+  const mostlyHidden=source&&source.getBoundingClientRect().bottom<=source.getBoundingClientRect().height*.35;
+  previewDock.hidden=!source||innerWidth>1100||!!document.querySelector('dialog[open]')||!mostlyHidden;
 }
 function renderQuickPreview(){
   if(!previewSource())return;
@@ -56,5 +58,5 @@ window.addEventListener('scroll',()=>{
   cancelAnimationFrame(previewFrame);previewFrame=requestAnimationFrame(updatePreviewVisibility);
 },{passive:true});
 window.addEventListener('resize',updatePreviewVisibility);
-new MutationObserver(updatePreviewVisibility).observe($('#saved-dialog'),{attributes:true,attributeFilter:['open']});
+document.querySelectorAll('dialog').forEach(dialog=>new MutationObserver(updatePreviewVisibility).observe(dialog,{attributes:true,attributeFilter:['open']}));
 renderQuickPreview();
